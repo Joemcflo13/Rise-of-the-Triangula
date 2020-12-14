@@ -7,6 +7,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     blockSettings.writeString("Started", "String")
+    game.reset()
 })
 function Make_Scene () {
     scene.setBackgroundImage(img`
@@ -650,10 +651,10 @@ if (blockSettings.exists("Started")) {
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         `)
-    story.printCharacterText("Help....", "?")
-    story.printCharacterText("Me....", "?")
     Character_Name = game.askForString("Character Name", 8)
     pause(500)
+    story.printCharacterText("Help....", Character_Name)
+    story.printCharacterText("Me....", Character_Name)
     blockSettings.writeString("Started", Character_Name)
 }
 Make_Scene()
