@@ -1,6 +1,9 @@
 namespace SpriteKind {
     export const Picture = SpriteKind.create()
 }
+function Continue (X: number, Y: number) {
+	
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     blockSettings.writeString("Started", "String")
     game.reset()
@@ -159,8 +162,8 @@ if (blockSettings.exists("Started")) {
     if (story.checkLastAnswer("Quit")) {
         blockSettings.clear()
         game.reset()
-    } else {
-    	
+    } else if (blockSettings.exists("Continue_X") && blockSettings.exists("Continue_Y")) {
+        Continue(blockSettings.readNumber("Continue_X"), blockSettings.readNumber("Continue_Y"))
     }
 } else {
     scene.setBackgroundImage(img`
@@ -561,3 +564,7 @@ if (blockSettings.exists("Started")) {
     blockSettings.writeString("Started", Character_Name)
 }
 Make_Scene()
+game.onUpdate(function () {
+    blockSettings.writeNumber("Continue_X", Character_Image.x)
+    blockSettings.writeNumber("Continue_Y", Character_Image.y)
+})
