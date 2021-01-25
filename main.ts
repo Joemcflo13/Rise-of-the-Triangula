@@ -2,7 +2,7 @@ namespace SpriteKind {
     export const Picture = SpriteKind.create()
 }
 function Continue (X: number, Y: number) {
-	
+    Character_Image.setPosition(X, Y)
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     blockSettings.writeString("Started", "String")
@@ -163,7 +163,13 @@ if (blockSettings.exists("Started")) {
         blockSettings.clear()
         game.reset()
     } else if (blockSettings.exists("Continue_X") && blockSettings.exists("Continue_Y")) {
-        Continue(blockSettings.readNumber("Continue_X"), blockSettings.readNumber("Continue_Y"))
+        if (true) {
+            Continue(blockSettings.readNumber("Continue_X"), blockSettings.readNumber("Continue_Y"))
+        } else {
+            story.printCharacterText("You have no saved data to be able to continue", "Error")
+            blockSettings.clear()
+            game.reset()
+        }
     }
 } else {
     scene.setBackgroundImage(img`
