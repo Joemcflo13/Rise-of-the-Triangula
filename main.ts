@@ -1,14 +1,30 @@
 namespace SpriteKind {
     export const Picture = SpriteKind.create()
+    export const Tree = SpriteKind.create()
 }
 function Continue (X: number, Y: number) {
     Character_Image.setPosition(X, Y)
 }
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     blockSettings.writeString("Started", "String")
     game.reset()
 })
-function Make_Scene () {
+function Chuduga_Chucktruh_OST () {
+    for (let index = 0; index < 4; index++) {
+        music.playTone(294, music.beat(BeatFraction.Whole))
+        music.playTone(392, music.beat(BeatFraction.Whole))
+        music.playTone(415, music.beat(BeatFraction.Half))
+        music.playTone(349, music.beat(BeatFraction.Half))
+        music.playTone(262, music.beat(BeatFraction.Whole))
+        music.playTone(294, music.beat(BeatFraction.Whole))
+        music.playTone(587, music.beat(BeatFraction.Whole))
+        music.playTone(440, music.beat(BeatFraction.Whole))
+        music.playTone(415, music.beat(BeatFraction.Half))
+        music.playTone(440, music.beat(BeatFraction.Whole))
+        music.playTone(523, music.beat(BeatFraction.Whole))
+    }
+}
+function Chuduga_Chucktruh () {
     scene.setBackgroundImage(img`
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999111111111111111111111111111111
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999111111111111111111111111111111
@@ -131,45 +147,38 @@ function Make_Scene () {
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         `)
-    tiles.setTilemap(tilemap`Chuduga_Chucktruh Village`)
+    tiles.setTilemap(tilemap`Outside Chuduga_Chucktruh`)
     Character_Image = sprites.create(img`
-        . . . . f f f f . . . . . 
-        . . f f f f f f f f . . . 
-        . f f f f f f c f f f . . 
-        f f f f f f c c f f f c . 
-        f f f c f f f f f f f c . 
-        c c c f f f e e f f c c . 
-        f f f f f e e f f c c f . 
-        f f f b f e e f b f f f . 
-        . f 2 1 f 4 2 f 1 4 f . . 
-        . f e 2 4 4 4 2 4 e f . . 
-        . f f f e e e e f f f . . 
-        f e f b 6 6 6 6 b f e f . 
-        e 4 f 6 6 6 6 6 6 f 4 e . 
-        e e f c c c c c c f e e . 
-        . . . f f f f f f . . . . 
-        . . . f f . . f f . . . . 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
+        5 5 5 5 5 5 5 5 5 5 5 5 5 
         `, SpriteKind.Player)
     controller.moveSprite(Character_Image)
     scene.cameraFollowSprite(Character_Image)
-    Character_Image.setPosition(599, 1155)
+    Character_Image.setPosition(759, 1043)
     Character_Image.setFlag(SpriteFlag.ShowPhysics, true)
+    Chuduga_Chucktruh_OST()
 }
 let Character_Image: Sprite = null
 let Character_Name = ""
 if (blockSettings.exists("Started")) {
-    story.showPlayerChoices("Continue", "Quit")
-    if (story.checkLastAnswer("Quit")) {
+    story.showPlayerChoices("Continue", "Restart")
+    if (story.checkLastAnswer("Restart")) {
         blockSettings.clear()
         game.reset()
-    } else if (blockSettings.exists("Continue_X") && blockSettings.exists("Continue_Y")) {
-        if (true) {
-            Continue(blockSettings.readNumber("Continue_X"), blockSettings.readNumber("Continue_Y"))
-        } else {
-            story.printCharacterText("You have no saved data to be able to continue", "Error")
-            blockSettings.clear()
-            game.reset()
-        }
     }
 } else {
     scene.setBackgroundImage(img`
@@ -569,8 +578,8 @@ if (blockSettings.exists("Started")) {
     story.printCharacterText("Me....", Character_Name)
     blockSettings.writeString("Started", Character_Name)
 }
-Make_Scene()
-game.onUpdate(function () {
+Chuduga_Chucktruh()
+forever(function () {
     blockSettings.writeNumber("Continue_X", Character_Image.x)
     blockSettings.writeNumber("Continue_Y", Character_Image.y)
 })
