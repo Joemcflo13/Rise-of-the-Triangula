@@ -9,6 +9,15 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     blockSettings.writeString("Started", "String")
     game.reset()
 })
+scene.onOverlapTile(SpriteKind.Player, tiles.util.door0, function (sprite, location) {
+    color.startFade(color.Black, color.originalPalette, 4500)
+    controller.moveSprite(Character_Image, 0, 0)
+    timer.after(5000, function () {
+        tiles.setTilemap(tilemap`Outside Chuduga_Chucktruh`)
+        sprite.setPosition(759, 1043)
+        controller.moveSprite(Character_Image, 100, 100)
+    })
+})
 function Chuduga_Chucktruh_OST () {
     for (let index = 0; index < 4; index++) {
         music.playTone(294, music.beat(BeatFraction.Whole))
@@ -24,6 +33,15 @@ function Chuduga_Chucktruh_OST () {
         music.playTone(523, music.beat(BeatFraction.Whole))
     }
 }
+scene.onOverlapTile(SpriteKind.Player, tiles.util.door5, function (sprite, location) {
+    color.startFade(color.Black, color.originalPalette, 4500)
+    controller.moveSprite(Character_Image, 0, 0)
+    timer.after(5000, function () {
+        tiles.setTilemap(tilemap`Chuduga_Chucktruh Village`)
+        controller.moveSprite(Character_Image, 100, 100)
+        sprite.setPosition(774, 308)
+    })
+})
 function Chuduga_Chucktruh () {
     scene.setBackgroundImage(img`
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999111111111111111111111111111111
